@@ -61,6 +61,10 @@ public class CrystalDetails
     /** Отметка о том, какой именно процесс забронировал кристалл */
     @ManyToOne (fetch = FetchType.LAZY)
     private LoadingProcess bookedForProcess;
+    /** Описание персональной перевозки кристалла */
+    @OneToMany (fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL,
+            mappedBy = "crystalDetails")
+    private Set<CrystalTransportation> crystalTransportation;
 
     // Рассчитываемые поля ////////////////////////////////////////////////////////////////////////////////
 
@@ -207,6 +211,14 @@ public class CrystalDetails
 
     public void setBookedForProcess(LoadingProcess bookedForProcess) {
         this.bookedForProcess = bookedForProcess;
+    }
+
+    public Set<CrystalTransportation> getCrystalTransportation() {
+        return crystalTransportation;
+    }
+
+    public void setCrystalTransportation(Set<CrystalTransportation> crystalTransportation) {
+        this.crystalTransportation = crystalTransportation;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
